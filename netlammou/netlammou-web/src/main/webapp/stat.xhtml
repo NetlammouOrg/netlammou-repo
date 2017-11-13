@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<f:metadata>
+	
+		<f:event listener="#{statBean.init()}" type="preRenderView"></f:event> <!-- Methode à exécuter au chargement de la page -->
+		
+	</f:metadata>
+	<link rel="stylesheet" href="./ressources/statistiques/morris.css"></link>
+	<script type="text/javascript" src="./ressources/statistiques/jquery.min.js"></script>
+	<script type="text/javascript" src="./ressources/statistiques/raphael-min.js"></script>
+	<script type="text/javascript" src="./ressources/statistiques/morris.min.js"></script>
+	
+	<script type="text/javascript">
+	
+		$(document).ready(function(){
+			Morris.Donut({
+				  element: 'myChart',
+				  data: [
+				    #{statBean.getPieData()}
+				  ]
+				});
+			
+			
+			Morris.Donut({
+				  element: 'myChart1',
+				  data: [
+				    #{statBean.getPieData()}
+				  ]
+				});
+		})
+		</script>
+		
+</h:head>
+<body> 
+<center>
+<p class="ikram" > Les statistiques selon les types d'actions : </p>
+	<div id="myChart1" style="width:50%;height:50%"></div>
+	<div id="myChart" style="width:50%;height:50%"></div>
+	</center>
+</body> 
+
+</html>

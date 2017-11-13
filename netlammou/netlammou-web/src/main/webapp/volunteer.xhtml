@@ -1,0 +1,136 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:ui="http://java.sun.com/jsf/facelets" 
+xmlns:f="http://java.sun.com/jsf/core" 
+xmlns:h="http://java.sun.com/jsf/html" 
+xmlns:p="http://primefaces.org/ui"
+template="/template/template.xhtml">
+
+<ui:define name="content">
+
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyAWyqGrHCTAN6bwVUYDQK15K_ELW0uHpxk" type="text/javascript" ></script>
+
+<form>
+
+
+ <p:tabView>
+        <p:ajax event="tabChange" listener="#{tabbedView.onTabChange}"/>
+        <p:ajax event="tabClose" listener="#{tabbedView.onTabClose}" />
+
+
+
+        <p:tab title="NGO's">
+        <p:gmap center="36.890257,30.707417" zoom="15" type="HYBRID" style="width:100%;height:600px" model="#{markersView.simpleModel}"  />
+        </p:tab>
+        <p:tab title="Actions">
+        <!-- liste -->
+        <h:form id="form">
+    <p:dataGrid var="a" value="#{ajouterBean.actions}" columns="3" layout="grid"
+        rows="6" paginator="true" id="cars"
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        rowsPerPageTemplate="6,12,16">
+ 
+        <f:facet name="header">
+            Current Actions
+        </f:facet>
+ 
+        <p:panel header="#{a.name}" >
+            <h:panelGrid columns="1" style="width:100%"  >
+               
+ 	<h:panelGrid columns="2" cellpadding="5">
+  			<h:outputText value="Description : " />
+            <h:outputText value="#{a.description}" />         
+    </h:panelGrid>
+    
+               <h:panelGrid columns="2" cellpadding="5"> 
+               <h:outputText value="Date : " />  
+                <h:outputText value="#{a.date}" />
+                 </h:panelGrid>
+  <h:panelGrid columns="2" cellpadding="5">   
+                <h:outputText value="#{a.desiredVolenteers}"/><h:outputText value="Volunteers required" />
+  </h:panelGrid>
+   <h:panelGrid columns="2" cellpadding="5"> 
+   <h:outputText value="Type : " />  
+                <h:outputText value="#{a.type}" />
+                </h:panelGrid>
+               
+               
+                
+ <h:panelGrid columns="2" cellpadding="5">
+         <h:outputText value="Likes : " />
+        <h:outputText id="output" value="#{ajouterBean.number}" />
+        <p:commandButton value="I like " actionListener="#{ajouterBean.increment}" update="output" />
+         <p:commandButton value="I participate" actionListener="#{ajouterBean.addParticipate()}"  />
+    </h:panelGrid>
+ 
+    
+                
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+   
+    </h:form>
+        
+        
+     
+        </p:tab>
+        <p:tab title="Rating">
+        
+        <h:form id="form1">
+    <p:dataGrid var="a" value="#{ajouterBean.actionsP}" columns="3" layout="grid"
+        rows="6" paginator="true" id="cars"
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        rowsPerPageTemplate="6,12,16">
+ 
+        <f:facet name="header">
+          Past Actions
+        </f:facet>
+ 
+        <p:panel header="#{a.name}" >
+         <p:growl id="messages" showDetail="true" />
+            <h:panelGrid columns="1" style="width:100%"  >
+               
+ 	<h:panelGrid columns="2" cellpadding="5">
+  			<h:outputText value="Description : " />
+            <h:outputText value="#{a.description}" />         
+    </h:panelGrid>
+    
+    <h:panelGrid columns="2" cellpadding="5"> 
+            <h:outputText value="Date : " />  
+            <h:outputText value="#{a.date}" />
+     </h:panelGrid>
+  
+   <h:panelGrid columns="2" cellpadding="5"> 
+   			<h:outputText value="Type : " />  
+            <h:outputText value="#{a.type}" />
+   </h:panelGrid>
+   <h:panelGrid columns="2" cellpadding="5"> 
+     <h:outputText value="Rate:" />
+        <p:rating value="#{ajouterBean.rating3}">
+            <p:ajax event="rate" listener="#{ajouterBean.rating3}" update="messages" />
+            <p:ajax event="cancel" listener="#{ajouterBean.oncancel}" update="messages" />
+        </p:rating>
+           </h:panelGrid>     
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+   
+    </h:form>
+        
+    
+        </p:tab>
+        
+        
+        
+        
+        
+
+</p:tabView>
+
+
+
+</form>
+</ui:define>
+</ui:composition>

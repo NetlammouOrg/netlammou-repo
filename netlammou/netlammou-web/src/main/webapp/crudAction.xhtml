@@ -1,0 +1,185 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml">
+<ui:define name="content">
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyAWyqGrHCTAN6bwVUYDQK15K_ELW0uHpxk" type="text/javascript" ></script>
+
+<center>
+	<H3>
+	<p:outputLabel>Action Management</p:outputLabel></H3>
+	</center>
+	<h:form id="form">
+
+    <p:tabView>
+        <p:ajax event="tabChange" listener="#{tabbedView.onTabChange}"/>
+        <p:ajax event="tabClose" listener="#{tabbedView.onTabClose}" />
+
+        <p:tab title="View Actions">
+            <h:panelGrid columns="2" cellpadding="10">
+        <p:gmap center="36.890257,30.707417" zoom="14" type="HYBRID" style="width:100%;height:400px" model="#{markersView.simpleModel}"  />
+                      
+<!-- affichage -->
+<p:dataTable value="#{ajouterBean.actions}" var="a" border="1">
+
+	<p:column filterBy="#{a.name}" >
+	<f:facet name="header">
+	<h:outputText value="Name" />
+	</f:facet>
+	<h:outputText value="#{a.name}" />
+	</p:column>
+	<p:column  filterBy="#{a.description}">
+	<f:facet name="header">
+	<h:outputText value="Desc" />
+	</f:facet>
+	<h:outputText value="#{a.description}" />
+	</p:column>
+	<p:column  filterBy="#{a.desiredVolenteers}">
+	<f:facet name="header">
+	<h:outputText value="number required" />
+	</f:facet>
+	<h:outputText value="#{a.desiredVolenteers}" />
+	</p:column>
+	<p:column  filterBy="#{a.type}">
+	<f:facet name="header">
+	<h:outputText value="Type" />
+	</f:facet>
+	<h:outputText value="#{a.type}" />
+	</p:column>
+	<p:column  filterBy="#{a.actif}">
+	<f:facet name="header">
+	<h:outputText value="actif" />
+	</f:facet>
+	<h:outputText value="#{a.actif == true ? 'Oui' : 'Non'}" />
+	</p:column>
+	
+	<p:column  filterBy="#{a.date}">
+	<f:facet name="header">
+	<h:outputText value="Date" />
+	</f:facet>
+	<h:outputText value="#{a.date}" />
+	</p:column>
+
+	</p:dataTable>
+
+ <h:commandButton value="Home" process="@this" action="actionMethod()" immediate="true" rendered="true or renderingMethod()" />
+    
+            </h:panelGrid>
+        </p:tab>
+        
+        
+        
+        
+        
+        <p:tab title="Add Actions ! " >
+            <h:panelGrid columns="2" cellpadding="10" >
+             
+              <p:panelGrid columns="2"  > 
+
+<p:outputLabel value="name"/>
+<p:inputText value="#{ajouterBean.name}" />
+
+<p:outputLabel value="Description" />
+<p:inputText value="#{ajouterBean.description}" />
+
+<h:outputText value="Actif / Inactif" />
+<h:selectBooleanCheckbox value="#{ajouterBean.actif}" />
+
+
+<h:outputText value="number" />
+<h:inputText value="#{ajouterBean.desiredVolenteers}" />
+
+
+<h:outputText value="type" />
+<h:selectOneMenu value="#{ajouterBean.type}">
+	<f:selectItem itemLabel="#{Selectionner le type}" itemValue=""/>
+	<f:selectItems value="#{data.geTypes()}"></f:selectItems>
+</h:selectOneMenu>	
+
+	<p:outputLabel for="button" value="Date:" />
+    <p:calendar id="button" value="#{ajouterBean.date}" showOn="button" />
+
+<h:commandButton action="#{ajouterBean.addAction()}" value="Ajouter" />
+<h:commandButton  action="#{ajouterBean.mettreAjourAction()}" value="Update"  />
+
+</p:panelGrid>
+
+<!-- affichage -->
+<p:dataTable value="#{ajouterBean.actions}" var="a" border="1" >
+	<p:column>
+	<f:facet name="header">
+	<h:outputText value="Name" />
+	</f:facet>
+	<h:outputText value="#{a.name}" />
+	</p:column>
+	<p:column>
+	<f:facet name="header">
+	<h:outputText value="Desc" />
+	</f:facet>
+	<h:outputText value="#{a.description}" />
+	</p:column>
+	<p:column>
+	<f:facet name="header">
+	<h:outputText value="number required" />
+	</f:facet>
+	<h:outputText value="#{a.desiredVolenteers}" />
+	</p:column>
+	<p:column>
+	<f:facet name="header">
+	<h:outputText value="Type" />
+	</f:facet>
+	<h:outputText value="#{a.type}" />
+	</p:column>
+	<p:column>
+	<f:facet name="header">
+	<h:outputText value="actif" />
+	</f:facet>
+	<h:outputText value="#{a.actif == true ? 'Oui' : 'Non'}" />
+	</p:column>
+	
+	<p:column>
+	<f:facet name="header">
+	<h:outputText value="Date" />
+	</f:facet>
+	<h:outputText value="#{a.date}" />
+	</p:column>
+	
+	
+	<p:column>
+	<f:facet name="header">
+	<h:outputText value="Action" />
+	</f:facet>
+	<center>
+	<h:commandButton action="#{ajouterBean.supprimer(a.id)}" value="supprimer" />
+	<h:commandButton action="#{ajouterBean.modifier(a)}" value="Modifier" /></center>
+	<p:commandButton value="Home" process="@this" action="actionMethod()" immediate="true" rendered="true or renderingMethod()" />
+	</p:column>	
+	</p:dataTable>
+<center>
+
+<br />
+<br />
+ <p:commandButton value="Home" process="@this" action="actionMethod()" immediate="true" rendered="true or renderingMethod()" />
+
+
+<h:body> <p:commandButton value="Home" process="@this" action="actionMethod()" immediate="true" rendered="true or renderingMethod()" />
+</h:body>
+ <p:commandButton value="Home" process="@this" action="actionMethod()" immediate="true" rendered="true or renderingMethod()" />
+
+
+</center>
+  
+            </h:panelGrid>
+        </p:tab>
+        <!-- rating -->
+        
+    </p:tabView>
+	
+	</h:form>
+	
+
+</ui:define>
+
+</ui:composition>
