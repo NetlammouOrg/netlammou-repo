@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/abc"
+    android:orientation="vertical"
+    tools:context=".activity.AddActivity">
+
+    <ImageView
+        android:id="@+id/imgtest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp" />
+
+    <EditText
+
+        android:id="@+id/username"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:hint="name"
+        android:inputType="text"
+
+        android:layout_above="@+id/password"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:hint="description"
+        android:inputType="text"
+
+        android:layout_above="@+id/passwordconfirm"
+        android:layout_alignStart="@+id/username" />
+
+    <EditText
+        android:id="@+id/passwordconfirm"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:hint="desired Vol"
+
+
+        android:layout_above="@+id/inscription"
+        android:layout_alignStart="@+id/password" />
+
+    <Button
+        android:id="@+id/inscription"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/editText3"
+        android:layout_alignStart="@+id/passwordconfirm"
+
+        android:background="#61E294"
+        android:text="Add" />
+
+    <TextView
+        android:id="@+id/editText3"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:text="Press add to create Action ! "
+        android:gravity="center"
+        android:textSize="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/inscription"
+        android:layout_marginBottom="143dp" />
+
+
+</RelativeLayout>
