@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.aziz.pidev.listAdapter"
+
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/produitName"
+        android:text="name"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/produitQuantite"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20dp"
+        android:layout_marginTop="70px"
+        android:text="quantite"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/produitCategorie"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20dp"
+        android:text="categorie"
+        android:layout_marginTop="140px"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/produitDescription"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20dp"
+
+        android:text="Description"
+        android:layout_marginTop="210px"
+        />
+
+</RelativeLayout>
