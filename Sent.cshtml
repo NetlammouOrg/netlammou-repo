@@ -1,4 +1,62 @@
-﻿@{
+﻿@model Pidev.Models.EmailFormModel
+@{
     ViewBag.Title = "Sent";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h2>Your message has been sent</h2>
+
+<h2>Sent</h2>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sent</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Sent", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <center>
+                <h1>Send an email </h1>
+                <h2></h2>
+                <hr />
+                <table>
+                    <tr>
+                        <td style="width: 80px">
+                            To:
+                        </td>
+                        <td>@Html.TextBoxFor(model => model.To)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Subject
+                        </td>
+                        <td>@Html.TextBoxFor(model => model.Subject)</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            Body:
+                        </td>
+                        <td>@Html.TextAreaFor(model => model.Body, new { rows = "15", cols = "25" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="Send" />
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <span style="color:green">@ViewBag.Message</span>
+            </center>
+          
+
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+
+        </div>
+    </div>
+</body>
+</html>
